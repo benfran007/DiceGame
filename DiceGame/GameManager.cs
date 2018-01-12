@@ -19,6 +19,21 @@ namespace DiceGame
             throw new NotImplementedException();
         }
 
+        public void EndTurn(GameData gameData)
+        {
+
+        }
+
+        public void Quit()
+        {
+
+        }
+
+        public void GameOver()
+        {
+
+        }
+
         public string ScoreCount()
         {
             throw new NotImplementedException();
