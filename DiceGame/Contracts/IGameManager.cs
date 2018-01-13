@@ -6,7 +6,7 @@ namespace DiceGame.Contracts
     {
         void NewGame();
         void EndGame();
-        void EndTurn(GameData gameData);
+        void EndTurn(GameData gameData, string currentPlayer);
         void GameOver();
         void Quit();
         String ScoreCount();

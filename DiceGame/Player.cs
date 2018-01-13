@@ -21,7 +21,7 @@ namespace DiceGame
             GameManager = gameManager;
             m_GameData = new GameData();
         }
-        
+
         public string PlayerName
         {
             get { return m_PlayerName; }
@@ -29,10 +29,15 @@ namespace DiceGame
 
         public void TakeTurn()
         {
-            m_GameData.GainedPoints = 0;
-            m_GameData.NumberOfSuccessiveRolls = 0;
+            ResetGameData();
             SignalPlayersTurn();
             ActOnPlayersChoice();
+        }
+
+        void ResetGameData()
+        {
+            m_GameData.GainedPoints = 0;
+            m_GameData.NumberOfSuccessiveRolls = 0;
         }
 
         void SignalPlayersTurn()
@@ -43,15 +48,15 @@ namespace DiceGame
 
         void ActOnPlayersChoice()
         {
-            if (Console.ReadKey().KeyChar == 'y')
+            if (Console.ReadKey().Key == ConsoleKey.Y)
             {
                 RollDie();
             }
-            else if (Console.ReadKey().KeyChar == 'n')
+            else if (Console.ReadKey().Key == ConsoleKey.N)
             {
                 FinishTurn();
             }
-            else if (Console.ReadKey().KeyChar == 'e')
+            else if (Console.ReadKey().Key == ConsoleKey.E)
             {
                 GameManager.EndGame();
             }
@@ -71,21 +76,26 @@ namespace DiceGame
             }
             else
             {
+                IncreaseGamePoint(numberRolled);
                 SignalPlayersTurn();
                 ActOnPlayersChoice();
             }
-            FinishTurn();
+        }
+
+        void IncreaseGamePoint(int pointIncrement)
+        {
+            m_GameData.GainedPoints += pointIncrement;
         }
 
         void Bust()
         {
-
+            ResetGameData();
+            FinishTurn();
         }
 
         void FinishTurn()
         {
-            //TODO: This should call EndTurn from the gamemanger and pass in the game date during the call
-            //GameManager.EndTurn...
+            GameManager.EndTurn(m_GameData, PlayerName);
         }
     }
 }
