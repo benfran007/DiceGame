@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DiceGame.Contracts;
 
 namespace DiceGame
@@ -29,7 +25,6 @@ namespace DiceGame
 
         public void TakeTurn()
         {
-            ResetGameData();
             SignalPlayersTurn();
             ActOnPlayersChoice();
         }
@@ -63,6 +58,7 @@ namespace DiceGame
             else
             {
                 Console.WriteLine("Invalid Choice!" + Environment.NewLine + "Enter a valid choice.");
+                ActOnPlayersChoice();
             }
         }
 
@@ -95,7 +91,7 @@ namespace DiceGame
 
         void FinishTurn()
         {
-            GameManager.EndTurn(m_GameData, PlayerName);
+            GameManager.EndTurn(m_GameData);
         }
     }
 }
