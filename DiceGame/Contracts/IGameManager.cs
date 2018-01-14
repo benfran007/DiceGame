@@ -9,5 +9,6 @@ namespace DiceGame.Contracts
         void EndTurn(GameData gameData);
         void GameOver();
         void Quit();
+        void DisplayCurrentScore();
     }
 }

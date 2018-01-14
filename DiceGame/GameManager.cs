@@ -69,7 +69,7 @@ namespace DiceGame
 
         void GetNextPlayer()
         {
-            Console.WriteLine("Enter the name of the next player...\t\t");
+            Console.WriteLine("\nEnter the name of the next player...\t\t");
             string newPlayer = Console.ReadLine();
             RegisterPlayer(new Player(newPlayer, Dice, this));
             GetPlayer();
@@ -77,7 +77,7 @@ namespace DiceGame
 
         void GetPlayer()
         {
-            Console.WriteLine("Any more players to Add?\n\tY - Yes\n\tN - No");
+            Console.WriteLine("\nAny more players to Add?\n\tY - Yes\n\tN - No");
             var choice = Console.ReadKey().Key;
 
             if (choice == ConsoleKey.Y)
@@ -88,12 +88,11 @@ namespace DiceGame
             {
                 numberOfPlayers = players.Count;
                 m_PlayerScores = new int[numberOfPlayers];
-                Console.WriteLine($"{players[currentPlayerIndex].PlayerName}'s turn to play.");
-                players[currentPlayerIndex].TakeTurn();
+                SignalNextPlayer();
             }
             else
             {
-                Console.WriteLine("Invalid Choice!" + Environment.NewLine + "Enter a valid choice.");
+                Console.WriteLine("\nInvalid Choice!" + Environment.NewLine + "Enter a valid choice.");
                 GetPlayer();
             }
         }
@@ -101,7 +100,7 @@ namespace DiceGame
         public void EndTurn(GameData gameData)
         {
             m_PlayerScores[currentPlayerIndex] += gameData.GainedPoints;
-            Console.WriteLine($"{players[currentPlayerIndex]} rolled {gameData.NumberOfSuccessiveRolls}" +
+            Console.WriteLine($"{players[currentPlayerIndex].PlayerName} rolled {gameData.NumberOfSuccessiveRolls}" +
                 $" time(s) and now has a total of {m_PlayerScores[currentPlayerIndex]} points.");
 
             if (m_PlayerScores[currentPlayerIndex] >= 100)
@@ -111,13 +110,13 @@ namespace DiceGame
             else
             {
                 currentPlayerIndex = (currentPlayerIndex + 1) % numberOfPlayers;
-                players[currentPlayerIndex].TakeTurn();
+                SignalNextPlayer();
             }
         }
 
         public void Quit()
         {
-            Console.WriteLine("\nGame is exiting...");
+            Console.WriteLine("\nGame Is Exiting...");
             Environment.Exit(0);
         }
 
@@ -130,6 +129,21 @@ namespace DiceGame
             }
             Console.WriteLine($"\t\tThe winner is {players[currentPlayerIndex].PlayerName}.\n\t\t\tCONGRATULATIONS!!!");
             ShowMenu();
+        }
+
+        public void DisplayCurrentScore()
+        {
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                Console.WriteLine($"\t\t{players[i].PlayerName}\t----\t{m_PlayerScores[i]}");
+            }
+            SignalNextPlayer();
+        }
+
+        void SignalNextPlayer()
+        {
+            Console.WriteLine($"\n{players[currentPlayerIndex].PlayerName}'s turn to play.");
+            players[currentPlayerIndex].TakeTurn();
         }
     }
 }

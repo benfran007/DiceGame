@@ -38,7 +38,8 @@ namespace DiceGame
         void SignalPlayersTurn()
         {
             Console.WriteLine("\nType any of the given characters to select an option"
-                + Environment.NewLine + "\tY - Roll Die\n\tN - Finish Turn\n\tE - End Current Game");
+                + Environment.NewLine + "\tY - Roll Die\n\tN - Finish Turn\n\t" +
+                "S - Show Current Score\n\tE - End Current Game");
         }
 
         void ActOnPlayersChoice()
@@ -55,6 +56,10 @@ namespace DiceGame
             else if (choice == ConsoleKey.E)
             {
                 GameManager.EndGame();
+            }
+            else if (choice == ConsoleKey.S)
+            {
+                GameManager.DisplayCurrentScore();
             }
             else
             {
