@@ -81,10 +81,12 @@ namespace DiceGame
         void IncreaseGamePoint(int pointIncrement)
         {
             m_GameData.GainedPoints += pointIncrement;
+            Console.WriteLine($"{PlayerName} has gained {m_GameData.GainedPoints} in the current round!");
         }
 
         void Bust()
         {
+            Console.WriteLine("You got a bust!");
             ResetGameData();
             FinishTurn();
         }
