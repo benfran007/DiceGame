@@ -37,17 +37,18 @@ namespace DiceGame
 
         void GetChoice()
         {
-            if (Console.ReadKey().Key == ConsoleKey.N)
+            var choice = Console.ReadKey().Key;
+            if (choice == ConsoleKey.N)
             {
                 NewGame();
             }
-            else if (Console.ReadKey().Key == ConsoleKey.Q)
+            else if (choice == ConsoleKey.Q)
             {
                 Quit();
             }
             else
             {
-                Console.WriteLine("Invalid Choice!" + Environment.NewLine + "Enter a valid choice.");
+                Console.WriteLine("\nInvalid Choice!" + Environment.NewLine + "Enter a valid choice.");
                 ShowMenu();
             }
         }
@@ -60,33 +61,40 @@ namespace DiceGame
         public void NewGame()
         {
             players = new List<IPlayer>();
-            Console.WriteLine("Enter first player name...\t\t");
+            Console.WriteLine("\nEnter first player name...\t\t");
             string firstPlayerName = Console.ReadLine();
             RegisterPlayer(new Player(firstPlayerName, Dice, this));
-            GetPlayers();
+            GetNextPlayer();
         }
 
-        void GetPlayers()
+        void GetNextPlayer()
         {
             Console.WriteLine("Enter the name of the next player...\t\t");
             string newPlayer = Console.ReadLine();
             RegisterPlayer(new Player(newPlayer, Dice, this));
+            GetPlayer();
+        }
 
+        void GetPlayer()
+        {
             Console.WriteLine("Any more players to Add?\n\tY - Yes\n\tN - No");
-            if (Console.ReadKey().Key == ConsoleKey.Y)
+            var choice = Console.ReadKey().Key;
+
+            if (choice == ConsoleKey.Y)
             {
-                GetPlayers();
+                GetNextPlayer();
             }
-            else if (Console.ReadKey().Key == ConsoleKey.N)
+            else if (choice == ConsoleKey.N)
             {
                 numberOfPlayers = players.Count;
                 m_PlayerScores = new int[numberOfPlayers];
+                Console.WriteLine($"{players[currentPlayerIndex].PlayerName}'s turn to play.");
                 players[currentPlayerIndex].TakeTurn();
             }
             else
             {
                 Console.WriteLine("Invalid Choice!" + Environment.NewLine + "Enter a valid choice.");
-                GetPlayers();
+                GetPlayer();
             }
         }
 
@@ -109,7 +117,7 @@ namespace DiceGame
 
         public void Quit()
         {
-            Console.WriteLine("Game is exiting...");
+            Console.WriteLine("\nGame is exiting...");
             Environment.Exit(0);
         }
 

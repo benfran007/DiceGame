@@ -37,27 +37,28 @@ namespace DiceGame
 
         void SignalPlayersTurn()
         {
-            Console.WriteLine("Type any of the given characters to select an option"
+            Console.WriteLine("\nType any of the given characters to select an option"
                 + Environment.NewLine + "\tY - Roll Die\n\tN - Finish Turn\n\tE - End Current Game");
         }
 
         void ActOnPlayersChoice()
         {
-            if (Console.ReadKey().Key == ConsoleKey.Y)
+            var choice = Console.ReadKey().Key;
+            if (choice == ConsoleKey.Y)
             {
                 RollDie();
             }
-            else if (Console.ReadKey().Key == ConsoleKey.N)
+            else if (choice == ConsoleKey.N)
             {
                 FinishTurn();
             }
-            else if (Console.ReadKey().Key == ConsoleKey.E)
+            else if (choice == ConsoleKey.E)
             {
                 GameManager.EndGame();
             }
             else
             {
-                Console.WriteLine("Invalid Choice!" + Environment.NewLine + "Enter a valid choice.");
+                Console.WriteLine("\nInvalid Choice!" + Environment.NewLine + "Enter a valid choice.");
                 ActOnPlayersChoice();
             }
         }
@@ -65,7 +66,7 @@ namespace DiceGame
         public void RollDie()
         {
             int numberRolled = Dice.GetRolledValue();
-            Console.WriteLine($"{PlayerName} Rolled - {numberRolled}");
+            Console.WriteLine($"\n{PlayerName} Rolled - {numberRolled}");
             if (numberRolled == 1)
             {
                 Bust();
@@ -81,12 +82,12 @@ namespace DiceGame
         void IncreaseGamePoint(int pointIncrement)
         {
             m_GameData.GainedPoints += pointIncrement;
-            Console.WriteLine($"{PlayerName} has gained {m_GameData.GainedPoints} in the current round!");
+            Console.WriteLine($"\n{PlayerName} has gained {m_GameData.GainedPoints} in the current round!");
         }
 
         void Bust()
         {
-            Console.WriteLine("You got a bust!");
+            Console.WriteLine("\nYou got a bust!");
             ResetGameData();
             FinishTurn();
         }
