@@ -23,16 +23,21 @@ namespace DiceGame
             get { return m_PlayerName; }
         }
 
-        public void TakeTurn()
+        public void TakeTurn(bool clearSuccessiveRolls)
         {
+            if (clearSuccessiveRolls)
+            {
+                m_GameData.NumberOfSuccessiveRolls = 0;
+                ResetGamePoints();
+            }
+            
             SignalPlayersTurn();
             ActOnPlayersChoice();
         }
 
-        void ResetGameData()
+        void ResetGamePoints()
         {
             m_GameData.GainedPoints = 0;
-            m_GameData.NumberOfSuccessiveRolls = 0;
         }
 
         void SignalPlayersTurn()
@@ -72,6 +77,7 @@ namespace DiceGame
         {
             int numberRolled = Dice.GetRolledValue();
             Console.WriteLine($"\n{PlayerName} Rolled - {numberRolled}");
+            m_GameData.NumberOfSuccessiveRolls += 1;
             if (numberRolled == 1)
             {
                 Bust();
@@ -93,7 +99,7 @@ namespace DiceGame
         void Bust()
         {
             Console.WriteLine("\nYou got a bust!");
-            ResetGameData();
+            ResetGamePoints();
             FinishTurn();
         }
 

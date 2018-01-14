@@ -30,7 +30,7 @@ namespace DiceGame
 
         public void EndGame()
         {
-            Console.WriteLine("The Game was exited before conclusion."
+            Console.WriteLine("\nThe Game was exited before conclusion."
                 + Environment.NewLine + "\tN - New Game\n\tQ - Quit Game");
             GetChoice();
         }
@@ -88,7 +88,7 @@ namespace DiceGame
             {
                 numberOfPlayers = players.Count;
                 m_PlayerScores = new int[numberOfPlayers];
-                SignalNextPlayer();
+                SignalNextPlayer(true);
             }
             else
             {
@@ -100,7 +100,7 @@ namespace DiceGame
         public void EndTurn(GameData gameData)
         {
             m_PlayerScores[currentPlayerIndex] += gameData.GainedPoints;
-            Console.WriteLine($"{players[currentPlayerIndex].PlayerName} rolled {gameData.NumberOfSuccessiveRolls}" +
+            Console.WriteLine($"\n{players[currentPlayerIndex].PlayerName} rolled {gameData.NumberOfSuccessiveRolls}" +
                 $" time(s) and now has a total of {m_PlayerScores[currentPlayerIndex]} points.");
 
             if (m_PlayerScores[currentPlayerIndex] >= 100)
@@ -110,7 +110,7 @@ namespace DiceGame
             else
             {
                 currentPlayerIndex = (currentPlayerIndex + 1) % numberOfPlayers;
-                SignalNextPlayer();
+                SignalNextPlayer(true);
             }
         }
 
@@ -135,15 +135,15 @@ namespace DiceGame
         {
             for (int i = 0; i < numberOfPlayers; i++)
             {
-                Console.WriteLine($"\t\t{players[i].PlayerName}\t----\t{m_PlayerScores[i]}");
+                Console.WriteLine($"\n\t\t{players[i].PlayerName}\t----\t{m_PlayerScores[i]}");
             }
-            SignalNextPlayer();
+            SignalNextPlayer(false);
         }
 
-        void SignalNextPlayer()
+        void SignalNextPlayer(bool clearSuccessiveRolls)
         {
             Console.WriteLine($"\n{players[currentPlayerIndex].PlayerName}'s turn to play.");
-            players[currentPlayerIndex].TakeTurn();
+            players[currentPlayerIndex].TakeTurn(clearSuccessiveRolls);
         }
     }
 }
