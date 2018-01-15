@@ -9,7 +9,6 @@ namespace DiceGame
         private IList<IPlayer> players;
         private int[] m_PlayerScores;
         private IDice Dice;
-        //private bool allPlayersRegistered;
         private int currentPlayerIndex;
         private int numberOfPlayers;
 
