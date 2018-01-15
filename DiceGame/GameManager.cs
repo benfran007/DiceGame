@@ -100,7 +100,7 @@ namespace DiceGame
         public void EndTurn(GameData gameData)
         {
             m_PlayerScores[currentPlayerIndex] += gameData.GainedPoints;
-            Console.WriteLine($"\n{players[currentPlayerIndex].PlayerName} rolled {gameData.NumberOfSuccessiveRolls}" +
+            Console.WriteLine($"\n\n{players[currentPlayerIndex].PlayerName} rolled {gameData.NumberOfSuccessiveRolls}" +
                 $" time(s) and now has a total of {m_PlayerScores[currentPlayerIndex]} points.");
 
             if (m_PlayerScores[currentPlayerIndex] >= 100)
@@ -142,7 +142,7 @@ namespace DiceGame
 
         void SignalNextPlayer(bool clearSuccessiveRolls)
         {
-            Console.WriteLine($"\n{players[currentPlayerIndex].PlayerName}'s turn to play.");
+            Console.WriteLine($"\n\n{players[currentPlayerIndex].PlayerName}'s turn to play.");
             players[currentPlayerIndex].TakeTurn(clearSuccessiveRolls);
         }
     }
