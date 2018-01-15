@@ -1,5 +1,4 @@
-﻿using System;
-
+﻿
 namespace DiceGame.Contracts
 {
     public interface IGameManager

@@ -22,7 +22,7 @@ namespace DiceGame
         {
             Console.WriteLine("  Welcome!!!\n  Are you ready to roll to victory?\n\tThe rules are simple" +
                 ". The first to get to a 100 wins the game.\n\tYou can roll as long as you like," +
-                " but DON'T roll a 1.\n\tA 1 is a bust and all the points gotten at that round is set to 0.\n\t");
+                " but DON'T roll a 1.\n\tA 1 is a bust and all the points gotten at that round is set to 0.\n");
             Console.WriteLine("\n\tN - New Game\n\tQ - Quit Game");
             GetChoice();
         }
@@ -60,7 +60,7 @@ namespace DiceGame
         public void NewGame()
         {
             players = new List<IPlayer>();
-            Console.WriteLine("\nEnter first player name...\t\t");
+            Console.Write("\n\nEnter first player name:\t");
             string firstPlayerName = Console.ReadLine();
             RegisterPlayer(new Player(firstPlayerName, Dice, this));
             GetNextPlayer();
@@ -68,7 +68,7 @@ namespace DiceGame
 
         void GetNextPlayer()
         {
-            Console.WriteLine("\nEnter the name of the next player...\t\t");
+            Console.Write("\n\nEnter the name of the next player:\t");
             string newPlayer = Console.ReadLine();
             RegisterPlayer(new Player(newPlayer, Dice, this));
             GetPlayer();

@@ -76,7 +76,7 @@ namespace DiceGame
         public void RollDie()
         {
             int numberRolled = Dice.GetRolledValue();
-            Console.WriteLine($"\n{PlayerName} Rolled - {numberRolled}");
+            Console.WriteLine($"\n\n{PlayerName} Rolled - {numberRolled}");
             m_GameData.NumberOfSuccessiveRolls += 1;
             if (numberRolled == 1)
             {
