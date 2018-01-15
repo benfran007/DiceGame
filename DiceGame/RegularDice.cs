@@ -3,7 +3,7 @@ using DiceGame.Contracts;
 
 namespace DiceGame
 {
-    class RegularDice : IDice
+    public class RegularDice : IDice
     {
         private readonly int m_NumberOfDieSides;
         private Random m_RandomGenerator = new Random();

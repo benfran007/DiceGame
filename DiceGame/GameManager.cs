@@ -4,7 +4,7 @@ using DiceGame.Contracts;
 
 namespace DiceGame
 {
-    class GameManager : IGameManager
+    public class GameManager : IGameManager
     {
         private IList<IPlayer> players;
         private int[] m_PlayerScores;

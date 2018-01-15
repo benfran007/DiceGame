@@ -3,7 +3,7 @@ using DiceGame.Contracts;
 
 namespace DiceGame
 {
-    class Player : IPlayer
+    public class Player : IPlayer
     {
         private IDice Dice;
         private IGameManager GameManager;
@@ -102,7 +102,7 @@ namespace DiceGame
             ResetGamePoints();
             FinishTurn();
         }
-
+        
         void FinishTurn()
         {
             GameManager.EndTurn(m_GameData);

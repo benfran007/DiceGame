@@ -2,7 +2,7 @@
 
 namespace DiceGame.Contracts
 {
-    interface IGameManager
+    public interface IGameManager
     {
         void NewGame();
         void EndGame();

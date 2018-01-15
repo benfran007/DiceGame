@@ -1,7 +1,7 @@
 ﻿
 namespace DiceGame.Contracts
 {
-    interface IPlayer
+    public interface IPlayer
     {
         string PlayerName { get; }
         void TakeTurn(bool clearSuccessiveRolls);

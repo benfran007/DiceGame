@@ -1,7 +1,7 @@
 ﻿
 namespace DiceGame.Contracts
 {
-    interface IDice
+    public interface IDice
     {
         int GetRolledValue();
     }
